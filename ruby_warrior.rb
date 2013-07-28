@@ -52,11 +52,11 @@ class Player
     attr_accessor :taking_damage, :direction
     def taking_damage?; taking_damage; end
     
-    DIRECTION_METHODS = {:walk! => :march!, :feel => :search, :rescue! => :save!, :attack! => :assault!}
+    DIRECTION_METHOD_ALIASES = {:walk! => :march!, :feel => :search, :rescue! => :save!, :attack! => :assault!}
     MINIMUM_HEALTH_TO_DEFEAT_ARCHER = 11
     HEALTHY = 20
     
-    DIRECTION_METHODS.each do |action, aliased|
+    DIRECTION_METHOD_ALIASES.each do |action, aliased|
       define_method(aliased) do
         send(action, direction)
       end
@@ -74,10 +74,6 @@ class Player
     
     def self.orientation
       class_variable_get(:@@orientation)
-    end
-    
-    def self.orientation=(new_orientation)
-      class_variable_set(:@@orientation, new_orientation)
     end
     
     def direction
